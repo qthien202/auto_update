@@ -9,8 +9,6 @@ This package integrates **[auto_updater](https://pub.dev/packages/auto_updater)*
 - **On Windows/macOS**: It uses `auto_updater` to check for updates from the **appcast** and applies them automatically.
 - **On Linux/Web**: It leverages `upgrader` to fetch update information from the same **appcast** and prompts users to update manually.
 
-By combining these two packages, **Auto Update** ensures that users on **all platforms** receive **consistent** and **timely** update notifications from a **centralized appcast** source.
-
 # Platform Support
 
 | Platform | Automatically Supported? | Appcast Supported? |
