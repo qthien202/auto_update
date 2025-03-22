@@ -4,8 +4,6 @@ A Flutter package for prompting users to upgrade when there is a newer version o
 
 # Overview
 
-## Overview
-
 This package integrates **[auto_updater](https://pub.dev/packages/auto_updater)** and **[upgrader](https://pub.dev/packages/upgrader)** to provide a seamless cross-platform auto-update solution, using a shared **appcast** feed for all platforms.
 
 - **On Windows/macOS**: It uses `auto_updater` to check for updates from the **appcast** and applies them automatically.
