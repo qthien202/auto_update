@@ -40,7 +40,7 @@ void main() async {
   // Set up auto update for Windows/macOS
   await setupAutoUpdate(
     appcastURL: "https://localhost/appcast.xml",
-    interval: 20, // Kiểm tra cập nhật mỗi 20 giây
+    interval: 20,
   );
 
   runApp(const MyApp());
