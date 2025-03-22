@@ -6,7 +6,7 @@ A Flutter package for prompting users to upgrade when there is a newer version o
 
 ## Overview
 
-This package integrates **auto_updater** and **upgrader** to provide a seamless cross-platform auto-update solution, using a shared **appcast** feed for all platforms.
+This package integrates **[auto_updater](https://pub.dev/packages/auto_updater)** and **[upgrader](https://pub.dev/packages/upgrader)** to provide a seamless cross-platform auto-update solution, using a shared **appcast** feed for all platforms.
 
 - **On Windows/macOS**: It uses `auto_updater` to check for updates from the **appcast** and applies them automatically.
 - **On Linux/Web**: It leverages `upgrader` to fetch update information from the same **appcast** and prompts users to update manually.
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
 You can also display a Cupertino style dialog by using the `dialogStyle` parameter.
 
 ```dart
-  body: UpgradeAlert(
+  body: AutoUpdateAlert(
     dialogStyle: UpgradeDialogStyle.cupertino,
     child: Center(child: Text('Checking...')),
   )
@@ -129,7 +129,7 @@ For [appcast](#appcast)), the release notes are taken from the description field
 
 ## Customization
 
-The alert can be customized by changing the `DialogTheme` on the `MaterialApp`, or by overriding methods in the `UpgradeAlert` class. See these examples for more details:
+The alert can be customized by changing the `DialogTheme` on the `MaterialApp`, or by overriding methods in the `AutoUpdateAlert` class. See these examples for more details:
 
 - [example/lib/main-alert-theme.dart](example/lib/main-alert-theme.dart)
 - [example/lib/main-custom-alert.dart](example/lib/main-custom-alert.dart)
@@ -139,11 +139,11 @@ The card can be customized by changing the `CardTheme` on the `MaterialApp`, or 
 - [example/lib/main-card-theme.dart](example/lib/main-card-theme.dart)
 - [example/lib/main-custom-card.dart](example/lib/main-custom-card.dart)
 
-Here are the custom parameters for `UpgradeAlert`:
+Here are the custom parameters for `AutoUpdateAlert`:
 
 - barrierDismissible: used to indicate whether tapping on the barrier will dismiss the dialog, which defaults to `false`
 - cupertinoButtonTextStyle: the text style for the cupertino dialog buttons, which defaults to `null`
-- dialogStyle: the upgrade dialog style, either `material` or `cupertino`, defaults to `material`, used only by UpgradeAlert, works on Android and iOS.
+- dialogStyle: the upgrade dialog style, either `material` or `cupertino`, defaults to `material`, used only by AutoUpdateAlert, works on Android and iOS.
 - onIgnore: called when the ignore button is tapped, defaults to `null`
 - onLater: called when the later button is tapped, defaults to `null`
 - onUpdate: called when the update button is tapped, defaults to `null`
@@ -251,7 +251,7 @@ description field.
 ## Go Router
 
 When using GoRouter (package go_router) with upgrader, you may need to provide
-a navigatorKey to the `UpgradeAlert` widget so that the correct route
+a navigatorKey to the `AutoUpdateAlert` widget so that the correct route
 context is used. Below is part of the code you will need for this. Also,
 checkout the [example/lib/main-gorouter.dart](example/lib/main-gorouter.dart) example for a more complete example.
 
@@ -262,7 +262,7 @@ checkout the [example/lib/main-gorouter.dart](example/lib/main-gorouter.dart) ex
       title: 'Upgrader GoRouter Example',
       routerConfig: routerConfig,
       builder: (context, child) {
-        return UpgradeAlert(
+        return AutoUpdateAlert(
           navigatorKey: routerConfig.routerDelegate.navigatorKey,
           child: child ?? Text('child'),
         );
@@ -273,12 +273,12 @@ checkout the [example/lib/main-gorouter.dart](example/lib/main-gorouter.dart) ex
 
 ## Android Back Button
 
-When using the `UpgradeAlert` widget, the Android back button will not
+When using the `AutoUpdateAlert` widget, the Android back button will not
 dismiss the alert dialog by default. To allow the back button to dismiss the
 dialog, use `shouldPopScope` and return true like this:
 
 ```
-UpgradeAlert(shouldPopScope: () => true);
+AutoUpdateAlert(shouldPopScope: () => true);
 ```
 
 ## Country Code
@@ -350,7 +350,7 @@ Widget build(BuildContext context) {
     title: 'Upgrader Example',
     home: Scaffold(
         appBar: AppBar(title: Text('Upgrader Appcast Example')),
-        body: UpgradeAlert(
+        body: AutoUpdateAlert(
           upgrader: upgrader,
           child: Center(child: Text('Checking...')),
         )),
@@ -390,7 +390,7 @@ to provide custom values.
 
 As an example, to replace the Ignore button with a custom value, first create a new
 class that extends UpgraderMessages, and override the buttonTitleIgnore function. Next,
-when calling UpgradeAlert (or UpgradeCard), add the parameter messages with an instance
+when calling AutoUpdateAlert (or UpgradeCard), add the parameter messages with an instance
 of your extended class. Here is an example:
 
 ```dart
@@ -399,7 +399,7 @@ class MyUpgraderMessages extends UpgraderMessages {
   String get buttonTitleIgnore => 'My Ignore';
 }
 
-UpgradeAlert(Upgrader(messages: MyUpgraderMessages()));
+AutoUpdateAlert(Upgrader(messages: MyUpgraderMessages()));
 ```
 
 ## Language localization
@@ -451,7 +451,7 @@ to provide custom values.
 
 As an example, to add the Spanish (es) language (which is already provided), first create a new
 class that extends UpgraderMessages, and override the message function. Next, add a string for
-each of the messages. Finally, when calling UpgradeAlert (or UpgradeCard), add the parameter messages with an instance
+each of the messages. Finally, when calling AutoUpdateAlert (or UpgradeCard), add the parameter messages with an instance
 of your extended class. Here is an example:
 
 ```dart
@@ -482,7 +482,7 @@ class MySpanishMessages extends UpgraderMessages {
   }
 }
 
-UpgradeAlert(upgrader: Upgrader(messages: MySpanishMessages()));
+AutoUpdateAlert(upgrader: Upgrader(messages: MySpanishMessages()));
 ```
 
 You can even force the `upgrader` package to use a specific language, instead of the
@@ -490,7 +490,7 @@ system language on the device. Just pass the language code to an instance of
 UpgraderMessages when displaying the alert or card. Here is an example:
 
 ```dart
-UpgradeAlert(upgrader: Upgrader(messages: UpgraderMessages(code: 'es')));
+AutoUpdateAlert(upgrader: Upgrader(messages: UpgraderMessages(code: 'es')));
 ```
 
 ## Semantic Versioning
