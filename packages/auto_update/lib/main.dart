@@ -1,6 +1,6 @@
 import 'package:auto_updater/auto_updater.dart';
 import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
+import 'package:universal_platform/universal_platform.dart';
 import 'package:upgrader/upgrader.dart';
 
 class AutoUpdate {
@@ -11,7 +11,7 @@ class AutoUpdate {
     required int interval,
     bool enableAutoCheck = true,
   }) async {
-    if (Platform.isWindows || Platform.isMacOS) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isMacOS) {
       await autoUpdater.setFeedURL(appcastURL);
 
       if (enableAutoCheck) {
@@ -62,6 +62,7 @@ class AutoUpdateAlert extends StatelessWidget {
   final GlobalKey<NavigatorState>? navigatorKey;
   final bool showLater = true;
   final bool showReleaseNotes = true;
+  final Map<String, String>? clientHeaders;
 
   const AutoUpdateAlert({
     super.key,
@@ -85,11 +86,12 @@ class AutoUpdateAlert extends StatelessWidget {
     this.cupertinoButtonTextStyle,
     this.shouldPopScope,
     this.navigatorKey,
+    this.clientHeaders,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isWindows || Platform.isMacOS) {
+    if (UniversalPlatform.isWindows || UniversalPlatform.isMacOS) {
       return child;
     }
     final upgrader = Upgrader(
@@ -107,6 +109,7 @@ class AutoUpdateAlert extends StatelessWidget {
       messages: messages,
       willDisplayUpgrade: willDisplayUpgrade,
       debugDisplayOnce: debugDisplayOnce,
+      clientHeaders: clientHeaders,
     );
 
     return UpgradeAlert(

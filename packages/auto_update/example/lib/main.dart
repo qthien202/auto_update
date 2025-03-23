@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
       ),
       home: AutoUpdateAlert(
         appcastURL: "https://localhost/appcast.xml",
-
         child: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
