@@ -32,9 +32,7 @@ import 'package:auto_update/auto_update.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Set up auto update for Windows/macOS
-  await setupAutoUpdate(
+  await autoUpdate.setupAutoUpdate(
     appcastURL: "https://localhost/appcast.xml",
     interval: 20,
   );
